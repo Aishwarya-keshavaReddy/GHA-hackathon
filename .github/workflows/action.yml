@@ -15,18 +15,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Check Jira Ticket Priority
-        run: |
-          JIRA_API="https://aishwaryareddy.atlassian.net/rest/api/latest/issue/SCRUM-2"
+      # - name: Check Jira Ticket Priority
+      #   run: |
+      #     JIRA_API="https://aishwaryareddy.atlassian.net/rest/api/latest/issue/SCRUM-2"
           
-          JIRA_USERNAME="aishwarya.kreddy027@gmail.com"
+      #     JIRA_USERNAME="aishwarya.kreddy027@gmail.com"
 
-          # JIRA_API_TOKEN="ATATT3xFfGF0jlCXLzIfXn65MpDjD_X60ojRD395DxCOjXVBigqfdsAYzNUYD5-8MbPmCu0qMX7wg1XFbALcpoqGRxJy4NtKYCjqGRnon5LjF5JjqC7prouJv0lJNHqw7lrpUdF0RAQjodCyCjZZBW10GMDq9PYCZvGR66WePuC6YLemc4_DF5c=F03EA46D"
-          # JIRA_ISSUE=$(curl -s -u $JIRA_USERNAME:$JIRA_API_TOKEN $JIRA_API)
+      #     # JIRA_API_TOKEN="ATATT3xFfGF0jlCXLzIfXn65MpDjD_X60ojRD395DxCOjXVBigqfdsAYzNUYD5-8MbPmCu0qMX7wg1XFbALcpoqGRxJy4NtKYCjqGRnon5LjF5JjqC7prouJv0lJNHqw7lrpUdF0RAQjodCyCjZZBW10GMDq9PYCZvGR66WePuC6YLemc4_DF5c=F03EA46D"
+      #     # JIRA_ISSUE=$(curl -s -u $JIRA_USERNAME:$JIRA_API_TOKEN $JIRA_API)
           
-          # JIRA_PRIORITY=$(echo $JIRA_ISSUE | jq -r '.fields.priority.name')
-          JIRA_PRIORITY = medium
-          echo "Jira Ticket Priority: $JIRA_PRIORITY"
+      #     # JIRA_PRIORITY=$(echo $JIRA_ISSUE | jq -r '.fields.priority.name')
+      #     JIRA_PRIORITY = medium
+      #     echo "Jira Ticket Priority: $JIRA_PRIORITY"
 
       - name: Assign jira lable
         run: |
