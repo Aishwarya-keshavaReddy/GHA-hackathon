@@ -16,7 +16,7 @@ jobs:
 
       - name: Check Jira Ticket Priority
         run: |
-         JIRA_API="https://aishwaryareddy.atlassian.net/rest/api/3/latest/issue/SCRUM-2"
+         JIRA_API="https://aishwaryareddy.atlassian.net/rest/api/3/issue/SCRUM-2"
           
           JIRA_USERNAME="aishwarya.kreddy027@gmail.com"
 
@@ -26,3 +26,4 @@ jobs:
           
           JIRA_PRIORITY=$(echo $JIRA_ISSUE | jq -r '.fields.priority.name')
           echo "Jira Ticket Priority: $JIRA_PRIORITY"
+          echo "jira issue : $JIRA_ISSUE"
