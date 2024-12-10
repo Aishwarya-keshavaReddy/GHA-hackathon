@@ -39,8 +39,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN {FS="/"} {print $3}')
-          GIT_HUB_TOKEN= ${{secrets.GITHUB_TOKEN}}
+          GIT_HUB_TOKEN=${{secrets.GITHUB_TOKEN}}
           echo "pr number : $PR_NUMBER"
+          echo "git token: $GIT_HUB_TOKEN"
           curl -L \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer $GIT_HUB_TOKEN" \
