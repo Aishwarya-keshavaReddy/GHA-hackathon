@@ -41,6 +41,7 @@ jobs:
         run: |
           PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN {FS="/"} {print $3}')
           GIT_HUB_TOKEN=${{secrets.GITHUB_TOKEN}}
+          JIRA_PRIORITY="medium"
           echo "Jira Ticket Priority: $JIRA_PRIORITY"
           echo "pr number : $PR_NUMBER"
           echo "git token: $GIT_HUB_TOKEN"
