@@ -1,0 +1,28 @@
+name: Check Jira Ticket Priority
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  check-priority:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check Jira Ticket Priority
+        run:
+          # Set the Jira API endpoint and issue key
+          JIRA_API="https://aishwaryareddy.atlassian.net/rest/api/latest/issue/SCRUM-2"
+          # Set the Jira username and API token for authentication
+          JIRA_USERNAME="aishwarya.kreddy027@gmail.com"
+          JIRA_API_TOKEN="ATATT3xFfGF0FaQQvpT6GVdc30KA1zpL5s_8Z3yBUQCFVPKeVq99WkPe0an6ancOTLoMp0TulkKH5T4pc-tNQojeUg-BI4EnadxyJo0Srahk97sWLapMIjqyRygNLvDXnewtGyzkMJmHTStvlvMiqtS5hc82czpjWAPNOSqwoCC5zLQOhnxbXLY=B3E15627"
+          # Make the API request to get the issue details
+          JIRA_ISSUE=$(curl -s -u $JIRA_USERNAME:$JIRA_API_TOKEN $JIRA_API)
+          # Parse the response to retrieve the priority field
+          JIRA_PRIORITY=$(echo $JIRA_ISSUE | jq -r '.fields.priority.name')
+          echo "Jira Ticket Priority: $JIRA_PRIORITY"
