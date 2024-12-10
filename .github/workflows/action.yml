@@ -27,13 +27,16 @@ jobs:
       #     # JIRA_PRIORITY=$(echo $JIRA_ISSUE | jq -r '.fields.priority.name')
       #     JIRA_PRIORITY = medium
       #     echo "Jira Ticket Priority: $JIRA_PRIORITY"
+  add_labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
 
-      - name: Assign jira lable
-        run: |
-          gh issue edit "$NUMBER" --add-label "$LABELS"
-          env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          NUMBER: ${{ github.event.number }}
-          LABELS: medium
-          echo "pr number : $NUMBER"
+      - name: add labels
+        uses: actions-ecosystem/action-add-labels@v1
+        if: ${{ startsWith(github.event.comment.body, '/add-labels') }}
+        with:
+          labels: |
+            documentation
+            changelog
