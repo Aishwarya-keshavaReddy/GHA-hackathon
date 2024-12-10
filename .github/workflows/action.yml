@@ -25,7 +25,7 @@ jobs:
           # # JIRA_ISSUE=$(curl -s -u $JIRA_USERNAME:$JIRA_API_TOKEN $JIRA_API)
           
           # # JIRA_PRIORITY=$(echo $JIRA_ISSUE | jq -r '.fields.priority.name')
-          JIRA_PRIORITY = medium
+          JIRA_PRIORITY="medium"
           echo "Jira Ticket Priority: $JIRA_PRIORITY"
   assign-labels:
     runs-on: ubuntu-latest
