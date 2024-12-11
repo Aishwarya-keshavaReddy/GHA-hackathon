@@ -3,21 +3,23 @@ name: Slack Notification
 on:
   pull_request:
     types:
-      - open
+      - opened
       - reopened
       - synchronize
 
 jobs:
   notify-on-label:
     runs-on: ubuntu-latest
+   
     
     steps:
+      - name: check PR label
+        uses: actions/checkout@v2
+
       - name: Check PR label
         id: check_label
-        uses: actions/github-script@v6
-        with:
-          script: |
-            echo " pr labels:  $(gh api --jq '.labels.[].name' /repos/{owner}/{repo}/pulls/${{ github.event.number }})"
+        run: |
+         echo " pr labels:  $(gh api --jq '.labels.[].name' /repos/Aishwarya-keshavaReddy/GHA-hackathon/pulls/${{ github.event.number }})"
         # run: echo "::set-output name=has_label::$(jq -r '.label.name' $GITHUB_EVENT_PATH | grep -q 'critical' && echo true || echo false)"
       
       - name: Send Slack notification
