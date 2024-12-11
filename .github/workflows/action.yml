@@ -27,11 +27,11 @@ jobs:
           # # JIRA_PRIORITY=$(echo $JIRA_ISSUE | jq -r '.fields.priority.name')
           JIRA_PRIORITY="medium"
           echo "Jira Ticket Priority: $JIRA_PRIORITY"
-  assign-labels:
-    runs-on: ubuntu-latest
-    needs: check-priority
+  # assign-labels:
+  #   runs-on: ubuntu-latest
+  #   needs: check-priority
 
-    steps:
+    # steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -41,7 +41,7 @@ jobs:
         run: |
           PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN {FS="/"} {print $3}')
           GIT_HUB_TOKEN=${{secrets.GITHUB_TOKEN}}
-          JIRA_PRIORITY=[medium]
+          # JIRA_PRIORITY=[medium]
           echo "Jira Ticket Priority: $JIRA_PRIORITY"
           echo "pr number : $PR_NUMBER"
           curl -L \
@@ -50,6 +50,6 @@ jobs:
               -H "Authorization: Bearer $GIT_HUB_TOKEN" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
               https://api.github.com/repos/Aishwarya-keshavaReddy/GHA-hackathon/issues/$PR_NUMBER/labels  \
-              -d '{"labels":[]}'
+              -d '{"labels":[$JIRA_PRIORITY]}'
        
         
