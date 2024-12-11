@@ -49,6 +49,6 @@ jobs:
               -H "Authorization: Bearer $GIT_HUB_TOKEN" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
               https://api.github.com/repos/Aishwarya-keshavaReddy/GHA-hackathon/issues/$PR_NUMBER/labels  \
-              -d '{"labels":[$JIRA_PRIORITY]}'
+              -d '{"labels":["critical"]}'
        
         
