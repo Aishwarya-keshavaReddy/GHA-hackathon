@@ -26,14 +26,13 @@ jobs:
           
           # # JIRA_PRIORITY=$(echo $JIRA_ISSUE | jq -r '.fields.priority.name')
           JIRA_PRIORITY="medium"
-          echo "Jira Ticket Priority: $JIRA_PRIORITY"
   # assign-labels:
   #   runs-on: ubuntu-latest
   #   needs: check-priority
 
     # steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      # - name: Checkout code
+      #   uses: actions/checkout@v2
 
       - name: Assign PR Labels
         env:
