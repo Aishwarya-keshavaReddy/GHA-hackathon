@@ -21,8 +21,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN}}
         id: get_pr_labels_list
         run: |
-         PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN {FS="/"} {print $3}')
-          GIT_HUB_TOKEN=${{secrets.GITHUB_TOKEN}}
+         PR_NUMBER=${{ github.event.pull_request.number }}
           labels_list=$(gh api \
                   -H "Accept: application/vnd.github+json" \
                   -H "X-GitHub-Api-Version: 2022-11-28" \
@@ -39,17 +38,11 @@ jobs:
             fi
           done
           echo "::set-output name=should_notify::$should_notify"
-          echo "bool: $steps.get_pr_labels_list.outputs.should_notify"
-
-
-      # - name: Check PR label
-      #   id: check_label
-      #   env:
-      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: |
-      #    echo " pr labels:  $(gh api --jq '.labels.[].name' /repos/Aishwarya-keshavaReddy/GHA-hackathon/pulls/${{ github.event.number }})"
-      #   # run: echo "::set-output name=has_label::$(jq -r '.label.name' $GITHUB_EVENT_PATH | grep -q 'critical' && echo true || echo false)"
       
+      - name: Debug Output
+        run: |
+         echo "Should Notify: ${{ steps.get_pr_labels_list.outputs.should_notify }}"
+
       - name: Send Slack notification
         if: steps.get_pr_labels_list.outputs.should_notify == true
         run: |
