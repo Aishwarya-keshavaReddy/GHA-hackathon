@@ -44,6 +44,6 @@ jobs:
           curl -X POST --data-urlencode "payload={\
             \"channel\": \"#common-sense-build-deploy-notifications\", \
             \"username\": \"PR REVIEW REQUIRED\", \
-            \"text\": \" Hey! <@channel> A PR <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}> with status: *${{steps.get_pr_labels_list.outputs.label_name}}* has been opened, Please review Asap!\", \
+            \"text\": \" Hey! <!channel> A PR <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}> with status: *${{steps.get_pr_labels_list.outputs.label_name}}* has been opened, Please review Asap!\", \
             \"icon_emoji\": \":github-actions:\" \
           }" ${{ secrets.SLACK_WEBHOOK_URL }}
