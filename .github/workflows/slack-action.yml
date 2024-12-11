@@ -37,7 +37,7 @@ jobs:
                 break
               fi
             done
-          echo "::set-output name=should_notify::false"
+            echo "::set-output name=should_notify::false"
 
 
       # - name: Check PR label
@@ -49,7 +49,7 @@ jobs:
       #   # run: echo "::set-output name=has_label::$(jq -r '.label.name' $GITHUB_EVENT_PATH | grep -q 'critical' && echo true || echo false)"
       
       - name: Send Slack notification
-        # if: steps.get_pr_labels_list.outputs.should_notify == true
+        if: steps.get_pr_labels_list.outputs.should_notify == true
         run: |
           echo "bool: ${{steps.get_pr_labels_list.outputs.should_notify}}"
           curl -X POST --data-urlencode "payload={\
