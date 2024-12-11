@@ -40,20 +40,20 @@ jobs:
           echo "::set-output name=should_notify::false"
 
 
-      - name: Check PR label
-        id: check_label
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-         echo " pr labels:  $(gh api --jq '.labels.[].name' /repos/Aishwarya-keshavaReddy/GHA-hackathon/pulls/${{ github.event.number }})"
-        # run: echo "::set-output name=has_label::$(jq -r '.label.name' $GITHUB_EVENT_PATH | grep -q 'critical' && echo true || echo false)"
-      
-      # - name: Send Slack notification
-      #   # if: steps.check_label.outputs.should_notifyl == 'true'
+      # - name: Check PR label
+      #   id: check_label
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #   run: |
-      #     curl -X POST --data-urlencode "payload={\
-      #       \"channel\": \"#common-sense-build-deploy-notifications\", \
-      #       \"username\": \"Aish-Testing\", \
-      #       \"text\": \"A PR *${{ github.event.pull_request.title }}* with Critical status has been opened, Please review Asap!\", \
-      #       \"icon_emoji\": \":github-actions:\" \
-      #     }" ${{ secrets.SLACK_WEBHOOK_URL }}
+      #    echo " pr labels:  $(gh api --jq '.labels.[].name' /repos/Aishwarya-keshavaReddy/GHA-hackathon/pulls/${{ github.event.number }})"
+      #   # run: echo "::set-output name=has_label::$(jq -r '.label.name' $GITHUB_EVENT_PATH | grep -q 'critical' && echo true || echo false)"
+      
+      - name: Send Slack notification
+        # if: steps.get_pr_labels_list.outputs.should_notify == 'true'
+        run: |
+          curl -X POST --data-urlencode "payload={\
+            \"channel\": \"#common-sense-build-deploy-notifications\", \
+            \"username\": \"Aish-Testing\", \
+            \"text\": \"A PR *${{ github.event.pull_request.title }}* with status: *${{steps.get_pr_labels_list.outputs.label_names}}* has been opened, Please review Asap!\", \
+            \"icon_emoji\": \":github-actions:\" \
+          }" ${{ secrets.SLACK_WEBHOOK_URL }}
