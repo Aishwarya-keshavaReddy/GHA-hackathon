@@ -29,5 +29,5 @@ jobs:
             \"channel\": \"#common-sense-build-deploy-notifications\", \
             \"username\": \"Aish-Testing\", \
             \"text\": \"A PR *${{ github.event.pull_request.title }}* with Critical status has been opened, Please review Asap!\", \
-            \"icon_emoji\": \":thankYou1:\" \
+            \"icon_emoji\": \":pr-open:\" \
           }" ${{ secrets.SLACK_WEBHOOK_URL }}
