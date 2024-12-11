@@ -1,0 +1,31 @@
+name: Slack Notification
+
+on:
+  pull_request:
+    types:
+      - open
+      - reopened
+      - synchronize
+
+jobs:
+  notify-on-label:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check PR label
+        id: check_label
+        uses: actions/github-script@v6
+        with:
+          script: |
+            echo " pr labels:  $(gh api --jq '.labels.[].name' /repos/{owner}/{repo}/pulls/${{ github.event.number }})"
+        # run: echo "::set-output name=has_label::$(jq -r '.label.name' $GITHUB_EVENT_PATH | grep -q 'critical' && echo true || echo false)"
+      
+      - name: Send Slack notification
+        # if: steps.check_label.outputs.has_label == 'true'
+        run: |
+          curl -X POST --data-urlencode "payload={\
+            \"channel\": \"#common-sense-build-deploy-notifications\", \
+            \"username\": \"Aish-Testing\", \
+            \"text\": \"A PR *${{ github.event.pull_request.title }}* with Critical status has been opened, Please review Asap!\", \
+            \"icon_emoji\": \":thankYou1:\" \
+          }" ${{ secrets.SLACK_WEBHOOK_URL }}
