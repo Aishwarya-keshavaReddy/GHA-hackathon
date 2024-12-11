@@ -44,7 +44,7 @@ jobs:
          echo "Should Notify: ${{ steps.get_pr_labels_list.outputs.should_notify }}"
 
       - name: Send Slack notification
-        if: steps.get_pr_labels_list.outputs.should_notify == true
+        if: steps.get_pr_labels_list.outputs.should_notify == 'true'
         run: |
           curl -X POST --data-urlencode "payload={\
             \"channel\": \"#common-sense-build-deploy-notifications\", \
