@@ -26,7 +26,7 @@ jobs:
           # # JIRA_ISSUE=$(curl -s -u $JIRA_USERNAME:$JIRA_API_TOKEN $JIRA_API)
           
           # # JIRA_PRIORITY=$(echo $JIRA_ISSUE | jq -r '.fields.priority.name')
-          JIRA_PRIORITY="medium"
+          JIRA_PRIORITY="Highest"
           echo "JIRA_PRIORITY=$JIRA_PRIORITY" >> $GITHUB_OUTPUT
 
       - name: Assign PR Labels
@@ -42,6 +42,6 @@ jobs:
               -H "Authorization: Bearer $GIT_HUB_TOKEN" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
               https://api.github.com/repos/Aishwarya-keshavaReddy/GHA-hackathon/issues/$PR_NUMBER/labels  \
-              -d '{"labels":["major"]}'
+              -d '{"labels":["Highest"]}'
        
         
