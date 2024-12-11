@@ -29,7 +29,7 @@ jobs:
                       https://api.github.com/repos/Aishwarya-keshavaReddy/GHA-hackathon/issues/$PR_NUMBER/labels)
           labels=$(echo "$labels_list" | jq -r '.[] | .name') 
           echo "labels=$labels_names" >> $GITHUB_OUTPUT       
-          notify_labels=["critical", 'major']
+          notify_labels=("critical" "major")
           IFS=',' read -ra labels <<< "$notify_labels"
             for label in "${labels[@]}"; do
               if [[ "${{ steps.get_pr_labels_list.outputs.label_names }}" == *"$label"* ]]; then
