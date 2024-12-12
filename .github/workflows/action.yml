@@ -36,7 +36,6 @@ jobs:
           PR_NUMBER=${{ github.event.pull_request.number }}
           GIT_HUB_TOKEN=${{secrets.GITHUB_TOKEN}}
           JIRA_PRIORITY=${{steps.get-jira-priority.outputs.JIRA_PRIORITY}}
-          echo " PR number: $JIRA_PRIORITY"
           curl -L \
             -X POST \
               -H "Accept: application/vnd.github+json" \
