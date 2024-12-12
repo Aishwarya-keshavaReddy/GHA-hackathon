@@ -38,12 +38,12 @@ jobs:
           done
           echo "::set-output name=should_notify::$should_notify"
 
-      # - name: Send Slack notification
-      #   if: steps.get_pr_labels_list.outputs.should_notify == 'true'
-      #   run: |
-      #     curl -X POST --data-urlencode "payload={\
-      #       \"channel\": \"#common-sense-build-deploy-notifications\", \
-      #       \"username\": \"PR REVIEW REQUIRED\", \
-      #       \"text\": \" Hey! <!channel> A PR <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}> with priority: *${{steps.get_pr_labels_list.outputs.label_name}}* has been opened, Please review Asap!\", \
-      #       \"icon_emoji\": \":github-actions:\" \
-      #     }" ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: Send Slack notification
+        if: steps.get_pr_labels_list.outputs.should_notify == 'true'
+        run: |
+          curl -X POST --data-urlencode "payload={\
+            \"channel\": \"#common-sense-build-deploy-notifications\", \
+            \"username\": \"PR REVIEW REQUIRED\", \
+            \"text\": \" Hey! <!channel> A PR <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}> with priority: *${{steps.get_pr_labels_list.outputs.label_name}}* has been opened, Please review Asap!\", \
+            \"icon_emoji\": \":github-actions:\" \
+          }" ${{ secrets.SLACK_WEBHOOK_URL }}
