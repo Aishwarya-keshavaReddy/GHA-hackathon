@@ -18,15 +18,15 @@ jobs:
       - name: Check Jira Ticket Priority
         id: get-jira-priority
         run: |
-          # JIRA_API="https://aishwaryareddy.atlassian.net/rest/api/latest/issue/SCRUM-2"
+          JIRA_API="https://aishwaryareddy.atlassian.net/rest/api/latest/issue/SCRUM-2"
           
-          # JIRA_USERNAME="aishwarya.kreddy027@gmail.com"
+          JIRA_USERNAME="aishwarya.kreddy027@gmail.com"
 
-          # # JIRA_API_TOKEN="ATATT3xFfGF0jlCXLzIfXn65MpDjD_X60ojRD395DxCOjXVBigqfdsAYzNUYD5-8MbPmCu0qMX7wg1XFbALcpoqGRxJy4NtKYCjqGRnon5LjF5JjqC7prouJv0lJNHqw7lrpUdF0RAQjodCyCjZZBW10GMDq9PYCZvGR66WePuC6YLemc4_DF5c=F03EA46D"
-          # # JIRA_ISSUE=$(curl -s -u $JIRA_USERNAME:$JIRA_API_TOKEN $JIRA_API)
+          JIRA_API_TOKEN=${{ secrets.JIRA_TOKEN }}
+          JIRA_ISSUE=$(curl -s -u $JIRA_USERNAME:$JIRA_API_TOKEN $JIRA_API)
           
-          # # JIRA_PRIORITY=$(echo $JIRA_ISSUE | jq -r '.fields.priority.name')
-          JIRA_PRIORITY="Highest"
+          JIRA_PRIORITY=$(echo $JIRA_ISSUE | jq -r '.fields.priority.name')
+          # JIRA_PRIORITY="Highest"
           echo "JIRA_PRIORITY=$JIRA_PRIORITY" >> $GITHUB_OUTPUT
 
       - name: Assign PR Labels
