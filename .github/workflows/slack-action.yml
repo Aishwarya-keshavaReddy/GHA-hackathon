@@ -37,6 +37,7 @@ jobs:
             fi
           done
           echo "::set-output name=should_notify::$should_notify"
+          echo " should notify: $should_notify"
 
       - name: Send Slack notification
         if: steps.get_pr_labels_list.outputs.should_notify == 'true'
